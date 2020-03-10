@@ -1,0 +1,22 @@
+# Slack TLS 1.0/1.1 deprecation
+The boost asio sample adapted to be able to talk to the slack API after the TLS 1.0/1.1 deprecation:
+// https://api.slack.com/unsafe-tls-deprecation
+// https://api.slack.com/changelog/2019-07-deprecate-early-tls-versions
+
+Fix from neico: https://github.com/chriskohlhoff/asio/issues/262
+
+# Output without setting SNI:
+
+rglobisch@E5570:~/projects/asio-ssl-client$ ./a.out hooks.slack.com 443
+Handshake failed: sslv3 alert handshake failure
+
+
+# Output with setting SNI:
+
+rglobisch@E5570:~/projects/asio-ssl-client$ ./a.out hooks.slack.com 443
+Verifying /C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert Global Root CA
+Verifying /C=US/O=DigiCert Inc/CN=DigiCert SHA2 Secure Server CA
+Verifying /C=US/ST=CA/L=San Francisco/O=Slack Technologies, Inc./CN=slack.com
+Enter message: ht
+Reply: HT
+
